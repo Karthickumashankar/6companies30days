@@ -1,0 +1,44 @@
+class Solution {
+    public boolean isRectangleCover(int[][] rectangles) {
+        if(rectangles.length==0 || rectangles[0].length==0){
+            return false;
+        }
+        int x1=Integer.MAX_VALUE;
+        int x2=Integer.MIN_VALUE;
+        int y1=Integer.MAX_VALUE;
+        int y2=Integer.MIN_VALUE;
+        HashSet<String> set = new HashSet<String>();
+        int area=0;
+        for(int[] a : rectangles){
+            x1=Math.min(a[0],x1);
+            y1=Math.min(a[1],y1);
+            x2=Math.max(a[2],x2);
+            y2=Math.max(a[3],y2);
+            area+=((a[2]-a[0])*(a[3]-a[1]));
+            String p=a[0]+" "+a[1];
+            String q=a[0]+" "+a[3];
+            String r=a[2]+" "+a[3];
+            String s=a[2]+" "+a[1];
+            if(!set.add(p)){
+                set.remove(p);
+            }
+            if(!set.add(q)){
+                set.remove(q);
+            }
+            if(!set.add(r)){
+                set.remove(r);
+            }
+            if(!set.add(s)){
+                set.remove(s);
+            }
+
+        }
+        int areaq=(x2-x1)*(y2-y1);
+        if(!set.contains(x1+" "+y1) || !set.contains(x1+" "+y2) || !set.contains(x2+" "+y1) || !set.contains(x2+" "+y2) || set.size()!=4 || area!=areaq){
+            return false;
+        }
+        else{
+        return true;
+        }
+    }
+}
