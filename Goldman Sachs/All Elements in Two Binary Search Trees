@@ -1,0 +1,19 @@
+class Solution {
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        ArrayList<Integer> lis=new ArrayList<Integer>();
+        inorder(root1,lis);
+        inorder(root2,lis);
+        Collections.sort(lis);
+        return lis;
+    }
+
+    void inorder(TreeNode root,List<Integer> lis)
+    {
+        if(root!=null)
+        {
+            inorder(root.left,lis);
+            lis.add(root.val);
+            inorder(root.right,lis);
+        }
+    }
+}
